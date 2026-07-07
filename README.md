@@ -1,0 +1,1 @@
+# globalpartners_business_analysis_project
