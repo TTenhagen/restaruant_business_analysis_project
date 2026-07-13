@@ -2,13 +2,6 @@
 
 **AWS-only, PySpark-only customer analytics platform extracting directly from SQL Server — built around a daily-evolving CLV model, not a static aggregate.**
 
-![AWS](https://img.shields.io/badge/AWS-Glue%20%7C%20Redshift-FF9900?logo=amazonaws&logoColor=white)
-![PySpark](https://img.shields.io/badge/PySpark-100%25%20Transformation-E25A1C?logo=apachespark&logoColor=white)
-![SQL Server](https://img.shields.io/badge/Source-SQL%20Server-CC2927?logo=microsoftsqlserver&logoColor=white)
-![Streamlit](https://img.shields.io/badge/Streamlit-Dashboard-FF4B4B?logo=streamlit&logoColor=white)
-![CI/CD](https://img.shields.io/badge/CI%2FCD-GitHub%20Actions-2088FF?logo=githubactions&logoColor=white)
-![License](https://img.shields.io/badge/license-MIT-green)
-
 ---
 
 ## 📋 Overview
