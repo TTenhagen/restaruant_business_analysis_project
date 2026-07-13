@@ -20,7 +20,7 @@ A multi-location restaurant business needs to know which customers are worth the
 
 ```
 ┌─────────────┐     ┌───────────────────┐     ┌──────────────────────────┐     ┌──────────────┐
-│ SQL Server  │ ──▶│   AWS Glue (JDBC) │ ──▶ │   AWS S3                 │ ──▶│  Redshift / │
+│ SQL Server  │ ──▶│   AWS Glue (JDBC) │ ──▶ │   AWS S3                 │ ──▶│  Redshift /  │
 │ (source)    │     │   PySpark ETL     │     │  Bronze → Silver → Gold  │     │  Athena      │
 └─────────────┘     └───────────────────┘     └──────────────────────────┘     └──────────────┘
                               │                                                         │
