@@ -2,6 +2,13 @@
 
 **AWS-only, PySpark-only customer analytics platform extracting directly from SQL Server — built around a daily-evolving CLV model, not a static aggregate.**
 
+![AWS](https://img.shields.io/badge/AWS-Glue%20%7C%20Redshift-FF9900?logo=amazonaws&logoColor=white)
+![PySpark](https://img.shields.io/badge/PySpark-100%25%20Transformation-E25A1C?logo=apachespark&logoColor=white)
+![SQL Server](https://img.shields.io/badge/Source-SQL%20Server-CC2927?logo=microsoftsqlserver&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-Dashboard-FF4B4B?logo=streamlit&logoColor=white)
+![CI/CD](https://img.shields.io/badge/CI%2FCD-GitHub%20Actions-2088FF?logo=githubactions&logoColor=white)
+![License](https://img.shields.io/badge/license-MIT-green)
+
 ---
 
 ## 📋 Overview
@@ -20,7 +27,7 @@ A multi-location restaurant business needs to know which customers are worth the
 
 ```
 ┌─────────────┐     ┌───────────────────┐     ┌──────────────────────────┐     ┌──────────────┐
-│ SQL Server  │ ──▶ │   AWS Glue (JDBC) │ ──▶│   AWS S3                 │ ──▶│  Redshift /  │
+│ SQL Server  │ ──▶│   AWS Glue (JDBC) │ ──▶ │   AWS S3                 │ ──▶│  Redshift / │
 │ (source)    │     │   PySpark ETL     │     │  Bronze → Silver → Gold  │     │  Athena      │
 └─────────────┘     └───────────────────┘     └──────────────────────────┘     └──────────────┘
                               │                                                         │
@@ -50,26 +57,13 @@ order_item_   │
                                     │
                                     ▼
                     ┌───────────────────────────────┐
-                    │ customer_clv_daily (GOLD)     │
-                    │grain: (user_id, snapshot_date)│
-                    │— cumulative spend window fn   │
+                    │  customer_clv_daily (GOLD)     │
+                    │  grain: (user_id, snapshot_date)│
+                    │  — cumulative spend window fn   │
                     └───────────────────────────────┘
 ```
 
 **The CLV table is the primary deliverable.** Grain is `(user_id, snapshot_date)`, not `(user_id)` — every day, a new snapshot partition is appended, with `cumulative_spend` computed via a Spark window function over all historical orders. This makes "how did this customer's value evolve" a simple time-series query instead of a recomputation.
-
-```sql
-CREATE TABLE customer_clv_daily (
-    user_id              STRING,
-    snapshot_date        DATE,
-    daily_spend          DECIMAL(12,2),
-    cumulative_spend      DECIMAL(12,2),
-    clv_to_date           DECIMAL(12,2),
-    clv_tier              STRING,   -- High / Medium / Low, re-tagged daily via percentile
-    order_count_to_date   INT,
-    PRIMARY KEY (user_id, snapshot_date)
-) PARTITIONED BY (snapshot_date);
-```
 
 ---
 
@@ -114,4 +108,3 @@ globalpartners-clv-project/
 ├── dashboard/app.py
 └── tests/test_clv_logic.py
 ```
-
