@@ -1,4 +1,4 @@
-# 🍽️ Restaruant Customer Lifetime Value & Restaurant Analytics
+# 🍽️ Customer Lifetime Value & Restaurant Analytics
 
 **AWS-only, PySpark-only customer analytics platform extracting directly from SQL Server — built around a daily-evolving CLV model, not a static aggregate.**
 
